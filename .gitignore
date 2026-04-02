@@ -35,6 +35,10 @@ target/
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 # Application secrets — NEVER commit these
+=======
+# Application secrets 
+>>>>>>> 6400d93fcdedf30166182450e73f12bab54d5c9e
 application.properties
 application-prod.properties
