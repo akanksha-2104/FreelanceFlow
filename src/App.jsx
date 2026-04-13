@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Clients from "./pages/Clients";
 import Projects from "./pages/Projects";
 import Invoices from "./pages/Invoices";
+import AppLayout from "./components/layout/AppLayout";
 
 function App() {
   return (
@@ -21,10 +22,12 @@ function App() {
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/clients" element={<Clients />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/invoices" element={<Invoices />} />
+            <Route element={<AppLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/clients" element={<Clients />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/invoices" element={<Invoices />} />
+            </Route>
           </Route>
 
           {/* Default Redirect */}

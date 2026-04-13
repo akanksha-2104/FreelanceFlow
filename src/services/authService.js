@@ -14,6 +14,8 @@ export const register = async (data) => {
 export const login = async (data) => {
   try {
     const response = await axiosInstance.post("/auth/login", data);
+    console.log("Full API response:", response);
+    console.log("Response data:", response.data);
     return response.data; // contains token
   } catch (error) {
     throw error;
