@@ -35,6 +35,7 @@ public class ClientService {
         client.setPhone(dto.getPhone());
         client.setCompany(dto.getCompany());
         client.setAddress(dto.getAddress());
+        client.setCreatedAt(dto.getCreatedAt());
 
         client.setUser(user);
 
@@ -85,6 +86,7 @@ public class ClientService {
         dto.setPhone(client.getPhone());
         dto.setCompany(client.getCompany());
         dto.setAddress(client.getAddress());
+        dto.setCreatedAt(client.getCreatedAt());
         return dto;
     }
 

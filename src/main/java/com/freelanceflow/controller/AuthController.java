@@ -1,10 +1,12 @@
 package com.freelanceflow.controller;
 
+import com.freelanceflow.dto.AuthResponseDTO;
 import com.freelanceflow.dto.LoginDTO;
 import com.freelanceflow.dto.RegisterDTO;
 import com.freelanceflow.dto.UserResponseDTO;
 import com.freelanceflow.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO) {
+
         return userService.login(loginDTO);
     }
 }

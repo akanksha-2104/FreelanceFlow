@@ -1,12 +1,12 @@
 package com.freelanceflow.services;
 
-import com.freelanceflow.dto.LoginDTO;
-import com.freelanceflow.dto.RegisterDTO;
-import com.freelanceflow.dto.UserResponseDTO;
+import com.freelanceflow.dto.*;
+import com.freelanceflow.entity.Task;
 import com.freelanceflow.entity.User;
 import com.freelanceflow.repository.UserRepository;
 import com.freelanceflow.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,7 +47,7 @@ public class UserService {
 
 
 
-    public String login(LoginDTO dto){
+    public ResponseEntity<AuthResponseDTO> login(LoginDTO dto){
         User user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(()-> new RuntimeException("User not found"));
 
@@ -57,7 +57,20 @@ public class UserService {
 
         String token = jwtUtil.generateToken(user.getEmail());
 
-        return token;
+        AuthResponseDTO response = mapToResponse(user, token);
 
+        return ResponseEntity.ok(response);
+
+    }
+
+    private AuthResponseDTO mapToResponse(User user, String token) {
+        AuthResponseDTO dto = new AuthResponseDTO();
+
+        dto.setToken(token);
+        dto.setUserId(user.getUserId());
+        dto.setEmail(user.getEmail());
+        dto.setUserName(user.getUsername());
+
+        return dto;
     }
 }

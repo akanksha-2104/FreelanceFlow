@@ -6,6 +6,7 @@ import com.freelanceflow.entity.enums.InvoiceStatus;
 import com.freelanceflow.repository.*;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InvoiceService {
 
-    private final InvoiceRepository invoiceRepository;
-    private final ProjectRepository projectRepository;
-    private final ClientRepository clientRepository;
+    @Autowired
+    private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
     private User getCurrentUser(){
         return(User) SecurityContextHolder
                 .getContext()
@@ -37,18 +44,17 @@ public class InvoiceService {
         User currentUser = getCurrentUser();
 
         // 2. Validate project ownership
-        Project project = projectRepository.findById(dto.getProjectId())
-                .filter(p -> p.getUser().getUserId().equals(currentUser.getUserId()))
+        Project project = projectRepository.findByProjectIdAndUser(dto.getProjectId(), currentUser)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         // 3. Validate client ownership
-        Client client = clientRepository.findById(dto.getClientId())
-                .filter(c -> c.getUser().getUserId().equals(currentUser.getUserId()))
+        Client client = clientRepository.findByClientIdAndUser(dto.getClientId(), currentUser)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
 
         // 4. Generate invoice number
-        long count = invoiceRepository.countByUser(currentUser) + 1;
-        String invoiceNumber = "INV-" + LocalDate.now().getYear() + "-" + String.format("%03d", count);
+
+        String invoiceNumber = "INV-" + currentUser.getUserId() + "-"
+                + System.currentTimeMillis();
 
         // 5. Create invoice entity
         Invoice invoice = new Invoice();

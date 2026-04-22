@@ -3,6 +3,8 @@ package com.freelanceflow.dto;
 import lombok.Data;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Data
 public class ClientDTO {
     @Getter
@@ -19,4 +21,7 @@ public class ClientDTO {
 
     @Getter
     private String address;
+
+    @Getter
+    private LocalDateTime createdAt;
 }

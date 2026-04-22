@@ -32,6 +32,9 @@ public class InvoiceController {
     @Autowired
     private PDFService pdfService;
 
+//    @Autowired
+//    private EmailService emailService;
+
     @PostMapping
     public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
         InvoiceResponseDTO response = invoiceService.createInvoice(dto);
@@ -94,4 +97,13 @@ public class InvoiceController {
                 .headers(headers)
                 .body(pdfBytes);
     }
+
+//    @PostMapping("/{id}/send")
+//    public ResponseEntity<String> sendInvoice(
+//            @PathVariable Long id) {
+//        emailService.sendInvoice(id);
+//        invoiceService.updateStatus(id, InvoiceStatus.SENT);
+//        return ResponseEntity.ok("Invoice sent successfully");
+//    }
+
 }
