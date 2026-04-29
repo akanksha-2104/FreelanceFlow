@@ -6,7 +6,7 @@ export default function Sidebar() {
       className="d-flex flex-column p-3"
       style={{ width: "220px", minHeight: "100vh", background: "#1E3A5F" }}
     >
-      <h5 className="text-white mb-4">FreelanceFlow</h5>
+      {/* <h5 className="text-white mb-4">FreelanceFlow</h5> */}
 
       <NavLink to="/dashboard" className="text-white text-decoration-none mb-2">
         Dashboard

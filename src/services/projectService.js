@@ -1,3 +1,46 @@
+// import axiosInstance from "../api/axiosInstance";
+
+// const projectService = {
+//   getAll: async () => {
+//     const res = await axiosInstance.get("/projects");
+//     return res.data;
+//   },
+
+//   getById: async (id) => {
+//     const res = await axiosInstance.get(`/projects/${id}`);
+//     return res.data;
+//   },
+
+//   create: async (data) => {
+//     const res = await axiosInstance.post("/projects", data);
+//     return res.data;
+//   },
+
+//   update: async (id, data) => {
+//     const res = await axiosInstance.put(`/projects/${id}`, data);
+//     return res.data;
+//   },
+
+//   updateStatus: async (id, status) => {
+//     const res = await axiosInstance.patch(
+//       `/projects/${id}/status`,
+//       null,
+//       { params: { status } }
+//     );
+//     return res.data;
+//   },
+
+//   remove: async (id) => {
+//     const res = await axiosInstance.delete(`/projects/${id}`);
+//     return res.data;
+//   },
+// };
+
+// export default projectService;
+
+
+
+
 import axiosInstance from "../api/axiosInstance";
 
 // Get all projects
@@ -39,3 +82,4 @@ export const remove = async (id) => {
   const response = await axiosInstance.delete(`/projects/${id}`);
   return response.data;
 };
+

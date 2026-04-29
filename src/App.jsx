@@ -8,7 +8,10 @@ import Dashboard from "./pages/Dashboard";
 import Clients from "./pages/Clients";
 import Projects from "./pages/Projects";
 import Invoices from "./pages/Invoices";
-import AppLayout from "./components/layout/AppLayout";
+import ProjectDetail from "./pages/ProjectDetail";
+import Profile from "./pages/Profile";
+
+import AppLayout from "./components/layout/AppLayout"; // contains Navbar
 
 function App() {
   return (
@@ -26,7 +29,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/clients" element={<Clients />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:id" element={<ProjectDetail />} />
               <Route path="/invoices" element={<Invoices />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
 
