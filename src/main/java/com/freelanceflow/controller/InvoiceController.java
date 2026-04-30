@@ -6,6 +6,7 @@ import com.freelanceflow.entity.Invoice;
 import com.freelanceflow.entity.User;
 import com.freelanceflow.entity.enums.InvoiceStatus;
 import com.freelanceflow.repository.InvoiceRepository;
+import com.freelanceflow.services.EmailService;
 import com.freelanceflow.services.InvoiceService;
 import com.freelanceflow.services.PDFService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class InvoiceController {
     @Autowired
     private PDFService pdfService;
 
-//    @Autowired
-//    private EmailService emailService;
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping
     public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
@@ -98,12 +99,12 @@ public class InvoiceController {
                 .body(pdfBytes);
     }
 
-//    @PostMapping("/{id}/send")
-//    public ResponseEntity<String> sendInvoice(
-//            @PathVariable Long id) {
-//        emailService.sendInvoice(id);
-//        invoiceService.updateStatus(id, InvoiceStatus.SENT);
-//        return ResponseEntity.ok("Invoice sent successfully");
-//    }
+    @PostMapping("/{id}/send")
+    public ResponseEntity<String> sendInvoice(
+            @PathVariable Long id) {
+        emailService.sendInvoice(id);
+        invoiceService.updateStatus(id, InvoiceStatus.SENT);
+        return ResponseEntity.ok("Invoice sent successfully");
+    }
 
 }

@@ -132,6 +132,9 @@ public class TimeLogService {
             dto.setTaskId(timeLog.getTask().getTaskId());
             dto.setTaskTitle(timeLog.getTask().getTitle());
         }
+        else {
+            dto.setTaskTitle(null);
+        }
 
 
         return dto;

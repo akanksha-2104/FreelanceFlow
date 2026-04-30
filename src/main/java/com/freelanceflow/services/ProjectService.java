@@ -87,7 +87,7 @@ public class ProjectService {
                 .findByProjectIdAndUser(projectId, currentUser)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        // ✅ If client changed
+        // If client changed
         if (!project.getClient().getClientId().equals(dto.getClientId())) {
 
             Client newClient = clientRepository

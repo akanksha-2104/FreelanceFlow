@@ -81,36 +81,26 @@ public class InvoiceService {
         BigDecimal subtotal = BigDecimal.ZERO;
 
         for (InvoiceItemDTO itemDTO : dto.getItems()) {
-
             InvoiceItem item = new InvoiceItem();
             item.setDescription(itemDTO.getDescription());
             item.setQuantity(itemDTO.getQuantity());
             item.setUnitPrice(itemDTO.getUnitPrice());
-
             // amount = quantity * unitPrice
             BigDecimal amount = itemDTO.getUnitPrice()
                     .multiply(itemDTO.getQuantity());
-
             item.setAmount(amount);
             item.setInvoice(invoice);
-
             invoice.getItems().add(item);
-
             subtotal = subtotal.add(amount);
         }
-
         // 7. Set subtotal
         invoice.setSubtotal(subtotal);
-
         // 8. Calculate total amount
         BigDecimal taxAmount = subtotal
                 .multiply(taxPercent)
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-
         BigDecimal totalAmount = subtotal.add(taxAmount);
-
         invoice.setTotalAmount(totalAmount);
-
         // 9. Save invoice (cascade saves items)
         Invoice savedInvoice = invoiceRepository.save(invoice);
 
