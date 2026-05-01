@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSummary } from '../services/dashboardService';
 import { formatCurrency } from '../utils/formatters';
+import AIChatWidget from '../components/dashboard/AIChatWidget';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -78,7 +79,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <h4 className="fw-bold mb-4">Dashboard</h4>
+            {/* <h4 className="fw-bold mb-4">Dashboard</h4> */}
 
             {/* ── KPI Cards ── */}
             <div className="row g-3 mb-4">
@@ -205,6 +206,9 @@ export default function Dashboard() {
                     )}
                 </div>
             </div>
+
+            <AIChatWidget />
+
         </div>
     );
 }

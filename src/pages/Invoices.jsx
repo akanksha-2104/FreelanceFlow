@@ -80,7 +80,7 @@ export default function Invoices() {
     return (
         <div>
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h4 className="fw-bold mb-0">Invoices</h4>
+                {/* <h4 className="fw-bold mb-0">Invoices</h4> */}
                 <button
                     className="btn btn-primary"
                     onClick={() => setShowBuilder(true)}
