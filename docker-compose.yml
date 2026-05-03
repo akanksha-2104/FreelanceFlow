@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: freelanceflow_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: freelanceflow_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - freelanceflow_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  backend:
+    image: ${DOCKERHUB_USERNAME}/freelanceflow-backend:latest
+    container_name: freelanceflow_backend
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - freelanceflow_network
+    expose:
+      - "8080"
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME}/freelanceflow-frontend:latest
+    container_name: freelanceflow_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - freelanceflow_network
+
+volumes:
+  mysql_data:
+
+networks:
+  freelanceflow_network:
+    driver: bridge
