@@ -48,8 +48,9 @@ public class UserService {
 
 
     public ResponseEntity<AuthResponseDTO> login(LoginDTO dto){
-        User user = userRepository.findByEmail(dto.getEmail())
-                .orElseThrow(()-> new RuntimeException("User not found"));
+        User user = userRepository
+                .findByEmailIgnoreCase(dto.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
         if(!encoder.matches(dto.getPassword(), user.getPasswordHash())){
             throw new RuntimeException("Wrong Password");
