@@ -1,6 +1,6 @@
 # FreelanceFlow — Project & Invoice Manager for Freelancers
 
-> A full-stack web application I built from scratch in 30 days while simultaneously learning Spring Boot and React.js.
+> A full-stack web application I built from scratch while simultaneously learning Spring Boot and React.js.
 
 **Live Demo:** [https://freelanceflow-frontend.onrender.com](https://freelanceflow-frontend-k43w.onrender.com)  
 **Backend API:** [https://freelanceflow-backend.onrender.com](https://freelanceflow-latest.onrender.com)
@@ -218,8 +218,6 @@ Key endpoints:
 
 ## What I Learned
 
-This section is the honest one.
-
 **Spring Boot is opinionated and that is a feature, not a bug.** Before this project I thought frameworks were shortcuts for people who did not understand the fundamentals. I was wrong. Spring Boot's opinions — the three-layer architecture, dependency injection, convention over configuration — are not shortcuts. They are the result of a decade of collective industry experience encoded into structure. Once I stopped fighting the conventions and started following them, everything became much cleaner.
 
 **DTOs are not optional.** I tried returning entities directly from controllers in the first two days. It took exactly one circular reference exception and one accidental password hash leak to understand why DTOs exist. The entity is the database shape. The DTO is the API contract. They are different things for good reasons.
@@ -252,7 +250,6 @@ This section is the honest one.
 
 ## Acknowledgements
 
-Built as a final year engineering project at Bajaj Institute of Technology, Wardha.
 
 The open source libraries that made this possible: Spring Boot, React.js, iText7, Chart.js, Bootstrap, Groq, and every Stack Overflow answer that saved me at 2am.
 
